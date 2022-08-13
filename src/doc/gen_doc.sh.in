@@ -1,0 +1,5 @@
+#!/bin/sh
+
+TYPE=${1}
+
+touch avrdude.${TYPE}
