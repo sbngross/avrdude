@@ -1,3 +1,66 @@
-#!/bin/sh
+#!/bin/sh -e
 
-cp generator/${1} .
+if [ -n "@SCRIPT_DEBUG@" ]
+then
+	set -x
+fi
+
+MAIN_EXE=@MAIN_EXE@
+AWK_BIN=@AWK_BIN@
+COMMENTS=@COMMENTS@
+
+OUT_FILE=${1}
+
+function call_avrdude()
+{
+	local args=${1}
+	local cmd=${2}
+	local expr=${3}
+	${MAIN_EXE} \
+		${args} 2>&1 \
+		| ${AWK_BIN} "${cmd}" \
+		| sed "${expr}"
+}
+
+# This one is a special case so handle it before the others
+if [ "${OUT_FILE}" = "version.texi" ]
+then
+	git -C @CMAKE_SOURCE_DIR@ describe --tags
+	cp generator/${OUT_FILE} .
+	exit 0
+fi
+
+AVRDUDE_ARGS=
+
+# Those two will be set to some unitelligible gibberish that somehow works.
+# Don't ask me "HOW" - I'm just pressing the buttons here...
+# Originated from Makefile.am with some adaptions regarding escaping
+AWK_CMD=
+SED_EXPR=
+
+case ${OUT_FILE} in
+programmers.texi)
+	AVRDUDE_ARGS="-c ?"
+	AWK_CMD='$2 ~ /^=$/ {printf("@item @code{%s} @tab %s\n",$1,gensub("[^=]+=[ \t]*","",1))}'
+	SED_EXPR='s# *,\? *<\?\(http://[^ \t>]*\)>\?#,@*\n@url{\1}#g'
+	;;
+programmer_types.texi)
+	AVRDUDE_ARGS="-c ? type"
+	AWK_CMD='$2 ~ /^=$/ {printf("@item @code{%s} @tab %s\n",$1,gensub("[^=]+=[ \t]*","",1))}'
+	SED_EXPR='s#<\?\(http://[^ \t,>]*\)>\?#@url{\1}#g'
+	;;
+parts.texi)
+	AVRDUDE_ARGS="-p ?"
+	AWK_CMD='$2 ~ /^=$/ {printf("@item @code{%s} @tab %s\n",$1,$3)}'
+	SED_EXPR=$(sed 's:\([^ \t]*\)[ \t]*\(.*\):s/\1$/\1 \2/g:g' < ${COMMENTS})
+	;;
+*)
+	exit 22
+	;;
+esac
+
+call_avrdude \
+	"${AVRDUDE_ARGS}" \
+	"${AWK_CMD}" \
+	"${SED_EXPR}" \
+	> ${OUT_FILE}

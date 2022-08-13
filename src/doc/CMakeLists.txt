@@ -20,9 +20,14 @@ set(GEN_TEXI_SCRIPT "gen_texi.sh")
 set(GEN_DOC_SCRIPT "gen_doc.sh")
 
 set(DOC_NAME ${PROJECT_NAME})
+# TODO: find and set actual executables
+set(MAIN_EXE avrdude)
+set(AWK_BIN awk)
+set(MAKEINFO_BIN makeinfo)
 
 set(MAIN_TEXI "${DOC_NAME}.texi")
 set(STYLE_SHEET "${DOC_NAME}.css")
+set(COMMENTS "parts_comments.txt")
 
 configure_file(${GEN_TEXI_SCRIPT}.in tmp/${GEN_TEXI_SCRIPT} @ONLY)
 file(COPY ${CMAKE_CURRENT_BINARY_DIR}/tmp/${GEN_TEXI_SCRIPT}
@@ -40,6 +45,7 @@ file(COPY ${CMAKE_CURRENT_BINARY_DIR}/tmp/${GEN_DOC_SCRIPT}
 
 file(COPY ${MAIN_TEXI} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${STYLE_SHEET} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${COMMENTS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # temporary solution till we figured out how to create texi files in a proper way
 file(COPY generator DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 if [ -n "@SCRIPT_DEBUG@" ]
 then
@@ -7,6 +7,7 @@ fi
 
 MAIN_TEXI=@MAIN_TEXI@
 STYLE_SHEET=@STYLE_SHEET@
+MAKEINFO_BIN=@MAKEINFO_BIN@
 
 TYPE=${1}
 
@@ -35,7 +36,7 @@ html)
 	;;
 esac
 
-makeinfo \
+${MAKEINFO_BIN} \
 	--${TYPE} \
 	${FMT_ARGS} \
 	${MAIN_TEXI} \
