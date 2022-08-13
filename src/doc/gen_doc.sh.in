@@ -1,5 +1,42 @@
 #!/bin/sh
 
+if [ -n "@SCRIPT_DEBUG@" ]
+then
+	set -x
+fi
+
+MAIN_TEXI=@MAIN_TEXI@
+STYLE_SHEET=@STYLE_SHEET@
+
 TYPE=${1}
 
-touch avrdude.${TYPE}
+FMT_ARGS=
+
+case ${TYPE} in
+pdf)
+	FMT_ARGS=" \
+		"
+	;;
+ps)
+	FMT_ARGS=" \
+		"
+	;;
+dvi)
+	FMT_ARGS=" \
+		"
+	;;
+html)
+	FMT_ARGS=" \
+		--css-include=${STYLE_SHEET} \
+		"
+	;;
+*)
+	exit 22
+	;;
+esac
+
+makeinfo \
+	--${TYPE} \
+	${FMT_ARGS} \
+	${MAIN_TEXI} \
+	;

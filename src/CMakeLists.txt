@@ -262,6 +262,10 @@ add_executable(avrdude
 
 target_link_libraries(avrdude PUBLIC libavrdude)
 
+if (BUILD_DOC)
+	add_subdirectory(doc)
+endif()
+
 # =====================================
 # Install
 # =====================================
