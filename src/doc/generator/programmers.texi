@@ -1,0 +1,113 @@
+@item @code{2232HIO} @tab FT2232H based generic programmer
+@item @code{4232h} @tab FT4232H based generic programmer
+@item @code{arduino} @tab Arduino
+@item @code{arduino-ft232r} @tab Arduino: FT232R connected to ISP
+@item @code{arduinoisp} @tab Arduino ISP Programmer
+@item @code{arduinoisporg} @tab Arduino ISP Programmer
+@item @code{atmelice} @tab Atmel-ICE (ARM/AVR) in JTAG mode
+@item @code{atmelice_dw} @tab Atmel-ICE (ARM/AVR) in debugWIRE mode
+@item @code{atmelice_isp} @tab Atmel-ICE (ARM/AVR) in ISP mode
+@item @code{atmelice_pdi} @tab Atmel-ICE (ARM/AVR) in PDI mode
+@item @code{atmelice_updi} @tab Atmel-ICE (ARM/AVR) in UPDI mode
+@item @code{avr109} @tab Atmel AppNote AVR109 Boot Loader
+@item @code{avr910} @tab Atmel Low Cost Serial Programmer
+@item @code{avr911} @tab Atmel AppNote AVR911 AVROSP
+@item @code{avrftdi} @tab FT2232D based generic programmer
+@item @code{avrisp} @tab Atmel AVR ISP
+@item @code{avrisp2} @tab Atmel AVR ISP mkII
+@item @code{avrispmkII} @tab Atmel AVR ISP mkII
+@item @code{avrispv2} @tab Atmel AVR ISP V2
+@item @code{buspirate} @tab The Bus Pirate
+@item @code{buspirate_bb} @tab The Bus Pirate (bitbang interface, supports TPI)
+@item @code{butterfly} @tab Atmel Butterfly Development Board
+@item @code{butterfly_mk} @tab Mikrokopter.de Butterfly
+@item @code{bwmega} @tab BitWizard ftdi_atmega builtin programmer
+@item @code{c232hm} @tab C232HM cable from FTDI
+@item @code{c2n232i} @tab serial port banging, reset=dtr sck=!rts mosi=!txd miso=!cts
+@item @code{dasa} @tab serial port banging, reset=rts sck=dtr mosi=txd miso=cts
+@item @code{dasa3} @tab serial port banging, reset=!dtr sck=rts mosi=txd miso=cts
+@item @code{diecimila} @tab alias for arduino-ft232r
+@item @code{dragon_dw} @tab Atmel AVR Dragon in debugWire mode
+@item @code{dragon_hvsp} @tab Atmel AVR Dragon in HVSP mode
+@item @code{dragon_isp} @tab Atmel AVR Dragon in ISP mode
+@item @code{dragon_jtag} @tab Atmel AVR Dragon in JTAG mode
+@item @code{dragon_pdi} @tab Atmel AVR Dragon in PDI mode
+@item @code{dragon_pp} @tab Atmel AVR Dragon in PP mode
+@item @code{ehajo-isp} @tab avr-isp-programmer from eHaJo,@*
+@url{http://www.eHaJo.de}
+@item @code{flip1} @tab FLIP USB DFU protocol version 1 (doc7618)
+@item @code{flip2} @tab FLIP USB DFU protocol version 2 (AVR4023)
+@item @code{ft232h} @tab FT232H in MPSSE mode
+@item @code{ft232r} @tab FT232R Synchronous BitBang
+@item @code{ft245r} @tab FT245R Synchronous BitBang
+@item @code{iseavrprog} @tab USBtiny-based programmer, https://iascaled.com
+@item @code{jtag1} @tab Atmel JTAG ICE (mkI)
+@item @code{jtag1slow} @tab Atmel JTAG ICE (mkI)
+@item @code{jtag2} @tab Atmel JTAG ICE mkII
+@item @code{jtag2avr32} @tab Atmel JTAG ICE mkII im AVR32 mode
+@item @code{jtag2dw} @tab Atmel JTAG ICE mkII in debugWire mode
+@item @code{jtag2fast} @tab Atmel JTAG ICE mkII
+@item @code{jtag2isp} @tab Atmel JTAG ICE mkII in ISP mode
+@item @code{jtag2pdi} @tab Atmel JTAG ICE mkII PDI mode
+@item @code{jtag2slow} @tab Atmel JTAG ICE mkII
+@item @code{jtag2updi} @tab JTAGv2 to UPDI bridge
+@item @code{jtag3} @tab Atmel AVR JTAGICE3 in JTAG mode
+@item @code{jtag3dw} @tab Atmel AVR JTAGICE3 in debugWIRE mode
+@item @code{jtag3isp} @tab Atmel AVR JTAGICE3 in ISP mode
+@item @code{jtag3pdi} @tab Atmel AVR JTAGICE3 in PDI mode
+@item @code{jtag3updi} @tab Atmel AVR JTAGICE3 in UPDI mode
+@item @code{jtagkey} @tab Amontec JTAGKey, JTAGKey-Tiny and JTAGKey2
+@item @code{jtagmkI} @tab Atmel JTAG ICE (mkI)
+@item @code{jtagmkII} @tab Atmel JTAG ICE mkII
+@item @code{jtagmkII_avr32} @tab Atmel JTAG ICE mkII im AVR32 mode
+@item @code{ktlink} @tab KT-LINK FT2232H interface with IO switching and voltage buffers.
+@item @code{lm3s811} @tab Luminary Micro LM3S811 Eval Board (Rev. A)
+@item @code{mib510} @tab Crossbow MIB510 programming board
+@item @code{micronucleus} @tab Micronucleus Bootloader
+@item @code{mkbutterfly} @tab Mikrokopter.de Butterfly
+@item @code{nibobee} @tab NIBObee
+@item @code{o-link} @tab O-Link, OpenJTAG from www.100ask.net
+@item @code{openmoko} @tab Openmoko debug board (v3)
+@item @code{pavr} @tab Jason Kyle's pAVR Serial Programmer
+@item @code{pickit2} @tab MicroChip's PICkit2 Programmer
+@item @code{pickit4_isp} @tab MPLAB(R) PICkit 4 in ISP mode
+@item @code{pickit4_pdi} @tab MPLAB(R) PICkit 4 in PDI mode
+@item @code{pickit4_updi} @tab MPLAB(R) PICkit 4 in UPDI mode
+@item @code{pkobn_updi} @tab Curiosity nano (nEDBG) in UPDI mode
+@item @code{ponyser} @tab design ponyprog serial, reset=!txd sck=rts mosi=dtr miso=cts
+@item @code{powerdebugger} @tab Atmel PowerDebugger (ARM/AVR) in JTAG mode
+@item @code{powerdebugger_dw} @tab Atmel PowerDebugger (ARM/AVR) in debugWire mode
+@item @code{powerdebugger_isp} @tab Atmel PowerDebugger (ARM/AVR) in ISP mode
+@item @code{powerdebugger_pdi} @tab Atmel PowerDebugger (ARM/AVR) in PDI mode
+@item @code{powerdebugger_updi} @tab Atmel PowerDebugger (ARM/AVR) in UPDI mode
+@item @code{serialupdi} @tab SerialUPDI
+@item @code{siprog} @tab Lancos SI-Prog,@*
+@url{http://www.lancos.com/siprogsch.html}
+@item @code{snap_isp} @tab MPLAB(R) SNAP in ISP mode
+@item @code{snap_pdi} @tab MPLAB(R) SNAP in PDI mode
+@item @code{snap_updi} @tab MPLAB(R) SNAP in UPDI mode
+@item @code{stk500} @tab Atmel STK500
+@item @code{stk500hvsp} @tab Atmel STK500 V2 in high-voltage serial programming mode
+@item @code{stk500pp} @tab Atmel STK500 V2 in parallel programming mode
+@item @code{stk500v1} @tab Atmel STK500 Version 1.x firmware
+@item @code{stk500v2} @tab Atmel STK500 Version 2.x firmware
+@item @code{stk600} @tab Atmel STK600
+@item @code{stk600hvsp} @tab Atmel STK600 in high-voltage serial programming mode
+@item @code{stk600pp} @tab Atmel STK600 in parallel programming mode
+@item @code{tc2030} @tab Tag-Connect TC2030
+@item @code{teensy} @tab Teensy Bootloader
+@item @code{ttl232r} @tab FTDI TTL232R-5V with ICSP adapter
+@item @code{tumpa} @tab TIAO USB Multi-Protocol Adapter
+@item @code{um232h} @tab UM232H module from FTDI
+@item @code{uncompatino} @tab uncompatino with all pairs of pins shorted
+@item @code{usbasp} @tab USBasp,@*
+@url{http://www.fischl.de/usbasp/}
+@item @code{usbasp-clone} @tab Any usbasp clone with correct VID/PID
+@item @code{usbtiny} @tab USBtiny simple USB programmer, https://learn.adafruit.com/usbtinyisp
+@item @code{wiring} @tab Wiring
+@item @code{xbee} @tab XBee Series 2 Over-The-Air (XBeeBoot)
+@item @code{xplainedmini} @tab Atmel AVR XplainedMini in ISP mode
+@item @code{xplainedmini_dw} @tab Atmel AVR XplainedMini in debugWIRE mode
+@item @code{xplainedmini_updi} @tab Atmel AVR XplainedMini in UPDI mode
+@item @code{xplainedpro} @tab Atmel AVR XplainedPro in JTAG mode
+@item @code{xplainedpro_updi} @tab Atmel AVR XplainedPro in UPDI mode
