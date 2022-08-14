@@ -17,8 +17,8 @@ PROJ_ROOT=@CMAKE_SOURCE_DIR@
 UPDATE_TIME_FULL=
 UPDATE_TIME_SHORT=
 
-EDITION_DATE=
-VERSION_DATE=
+EDITION_DATE=@PROJ_VERSION_DATE@
+VERSION_DATE=@PROJ_VERSION_DATE@
 VER_SUFFIX=
 
 DATE_LOCALE=C
@@ -63,26 +63,21 @@ set_git_version()
 	local tag=v${PROJ_VERSION}
 	local dirty=$(call_git diff && call_git diff --cached || echo -dirty)
 
-	# TODO alternative if no tag is present
-	EDITION_DATE=$(call_git show ${tag} --format="%cd")
+	EDITION_DATE=$(call_git show ${tag} --format="%cd" --always)
 	VERSION_DATE=$(call_git show --format="%cd")
 	VER_SUFFIX=$(call_git show --format="%h")
 
 	VER_SUFFIX=git-${VER_SUFFIX}${dirty}
 }
 
-set_tarball_version()
-{
-	#TODO: fill me
-	echo 0
-}
-
 build_version()
 {
 	set_update_time
 
-	# TODO check if we are allowed to do this
-	set_git_version
+	if call_git status
+	then
+		set_git_version
+	fi
 
 	echo "@set UPDATED ${UPDATE_TIME_FULL}"
 	echo "@set UPDATED-MONTH ${UPDATE_TIME_SHORT}"
