@@ -9,9 +9,23 @@ MAIN_EXE=@MAIN_EXE@
 AWK_BIN=@AWK_BIN@
 COMMENTS=@COMMENTS@
 
+MAIN_DOC=@MAIN_TEXI@
+
+PROJ_VERSION=@CMAKE_PROJECT_VERSION@
+PROJ_ROOT=@CMAKE_SOURCE_DIR@
+
+UPDATE_TIME_FULL=
+UPDATE_TIME_SHORT=
+
+EDITION_DATE=
+VERSION_DATE=
+VER_SUFFIX=
+
+DATE_LOCALE=C
+
 OUT_FILE=${1}
 
-function call_avrdude()
+call_avrdude()
 {
 	local args=${1}
 	local cmd=${2}
@@ -22,11 +36,64 @@ function call_avrdude()
 		| sed "${expr}"
 }
 
+call_git()
+{
+	local cmd=${1}
+	shift 1
+	git -C ${PROJ_ROOT} \
+		${cmd} \
+		--quiet \
+		--date="format:%Y%m%d" \
+		${@} \
+		;
+}
+
+set_update_time()
+{
+	local epoch=$(stat --printf="%Y" ${MAIN_DOC})
+	#TODO: check this and get system info
+#	local epoch_bsd$(stat -f "%m" ${MAIN_DOC}) # presumably works for BSD
+
+	UPDATE_TIME_FULL=$(LC_TIME=${DATE_LOCALE} date --date=@${epoch} +"%e. %B %Y")
+	UPDATE_TIME_SHORT=$(LC_TIME=${DATE_LOCALE} date --date=@${epoch} +"%B %Y")
+}
+
+set_git_version()
+{
+	local tag=v${PROJ_VERSION}
+	local dirty=$(call_git diff && call_git diff --cached || echo -dirty)
+
+	# TODO alternative if no tag is present
+	EDITION_DATE=$(call_git show ${tag} --format="%cd")
+	VERSION_DATE=$(call_git show --format="%cd")
+	VER_SUFFIX=$(call_git show --format="%h")
+
+	VER_SUFFIX=git-${VER_SUFFIX}${dirty}
+}
+
+set_tarball_version()
+{
+	#TODO: fill me
+	echo 0
+}
+
+build_version()
+{
+	set_update_time
+
+	# TODO check if we are allowed to do this
+	set_git_version
+
+	echo "@set UPDATED ${UPDATE_TIME_FULL}"
+	echo "@set UPDATED-MONTH ${UPDATE_TIME_SHORT}"
+	echo "@set EDITION ${PROJ_VERSION}-${EDITION_DATE}"
+	echo "@set VERSION ${PROJ_VERSION}-${VERSION_DATE}-${VER_SUFFIX}"
+}
+
 # This one is a special case so handle it before the others
 if [ "${OUT_FILE}" = "version.texi" ]
 then
-	git -C @CMAKE_SOURCE_DIR@ describe --tags
-	cp generator/${OUT_FILE} .
+	build_version > ${OUT_FILE}
 	exit 0
 fi
 

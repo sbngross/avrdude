@@ -3,26 +3,23 @@
 if [ -n "@SCRIPT_DEBUG@" ]
 then
 	set -x
+	LOG_FILE=@CMAKE_BINARY_DIR@@CMAKE_FILES_DIRECTORY@/CMakeOutput.log
+else
+	LOG_FILE=/dev/null
 fi
 
 MAIN_TEXI=@MAIN_TEXI@
 STYLE_SHEET=@STYLE_SHEET@
 MAKEINFO_BIN=@MAKEINFO_BIN@
 
+
 TYPE=${1}
+OUT_FILE=${2}
 
 FMT_ARGS=
 
 case ${TYPE} in
-pdf)
-	FMT_ARGS=" \
-		"
-	;;
-ps)
-	FMT_ARGS=" \
-		"
-	;;
-dvi)
+pdf|ps|dvi)
 	FMT_ARGS=" \
 		"
 	;;
@@ -37,7 +34,9 @@ html)
 esac
 
 ${MAKEINFO_BIN} \
+	--output ${OUT_FILE} \
 	--${TYPE} \
 	${FMT_ARGS} \
 	${MAIN_TEXI} \
+	>> ${LOG_FILE} 2>&1 \
 	;
